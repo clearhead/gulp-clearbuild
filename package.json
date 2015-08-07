@@ -18,7 +18,7 @@
     "ES6",
     "JSX"
   ],
-  "author": "casecode <casey.r.white@gmail.com">,
+  "author": "casecode <casey.r.white@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/clearhead/gulp-clearbuild/issues"
