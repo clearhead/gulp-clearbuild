@@ -1,4 +1,8 @@
+import babel from 'babel-core';
+import babelify from 'babelify';
 import commentRegex from 'comment-regex';
+import sassify from 'sassify';
+import stringify from 'stringify';
 import through2 from 'through2';
 
 const concat = String.prototype.concat.bind('');
@@ -31,16 +35,33 @@ function hasCommonModules(code) {
   return !!code.replace(commentRegex, '').match(/import|export|require|exports/);
 }
 
-function optimizelyTransform() {
+function buildScripts() {
   return through2.obj((file, enc, next) => {
     // get string of buffer contents
     const contents = file.contents.toString();
-    if (!hasCommonModules(contents)) return next(null, file);
+    const babelOptions = {
+      jsxPragma: 'jsxr',
+      plugins: ['object-assign'],
+    };
 
-    file.contents = new Buffer(parseLoop(contents));
-
-    next(null, file);
+    if (hasCommonModules(contents)) {
+      browserify(file.path)
+        .transform(babelify.configure(babelOptions))
+        .transform(stringify(['.html']))
+        .transform(sassify, { sourceMap: false })
+        .bundle((err, result) => {
+          if (err) console.error(err);
+          file.contents = new Buffer(parseLoop(result));
+          next(null, file);
+        });
+    } else {
+      babel.transformFile(file, babelOptions, (err, result) => {
+        if (err) console.error(err);
+        file.contents = result;
+        return next(null, file);
+      });
+    }
   });
 }
 
-export default optimizelyTransform;
+export default buildScripts;
