@@ -4,6 +4,7 @@ import sassify from 'sassify';
 import stringify from 'stringify';
 import through2 from 'through2';
 import optimizely from './optimizelify';
+import commentRegex from 'comment-regex';
 
 const babelOptions = {
   jsxPragma: 'jsxr',
@@ -11,10 +12,10 @@ const babelOptions = {
 };
 
 function hasCommonModules(code) {
-  return !!code.replace(commentRegex, '').match(/import|export|require|exports/);
+  return !!code.replace(commentRegex, '').match(/(import|export|require|exports/)\W/);
 }
 
-function esnextify() {
+function bundlify() {
   return through2.obj((file, enc, next) => {
     // get string of buffer contents
     const contents = file.contents.toString();
@@ -40,4 +41,4 @@ function esnextify() {
   });
 }
 
-export default esnextify;
+export default bundlify;

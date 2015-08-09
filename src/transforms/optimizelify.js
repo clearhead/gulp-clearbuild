@@ -1,5 +1,3 @@
-import commentRegex from 'comment-regex';
-
 const concat = String.prototype.concat.bind('');
 
 function optimizelify(code) {
