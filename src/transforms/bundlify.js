@@ -1,9 +1,10 @@
 import babel from 'babel-core';
 import babelify from 'babelify';
+import browserify from 'browserify';
 import sassify from 'sassify';
 import stringify from 'stringify';
 import through2 from 'through2';
-import optimizely from './optimizelify';
+import optimizelify from './optimizelify';
 import commentRegex from 'comment-regex';
 
 const babelOptions = {
@@ -25,16 +26,18 @@ function bundlify() {
         .transform(babelify.configure(babelOptions))
         .transform(stringify(['.html']))
         .transform(sassify, { sourceMap: false })
-        .bundle((err, result) => {
+        .bundle((err, buf) => {
           if (err) console.error(err);
-          const transformed = /optimizely/.test(code) ? optimizelify(result) : result;
+
+          const result = buf.toString();
+          const transformed = /optimizely/.test(result) ? optimizelify(result) : result;
           file.contents = new Buffer(transformed);
           next(null, file);
         });
     } else {
-      babel.transformFile(file, babelOptions, (err, result) => {
+      babel.transformFile(file, babelOptions, (err, buf) => {
         if (err) console.error(err);
-        file.contents = result;
+        file.contents = buf;
         return next(null, file);
       });
     }
