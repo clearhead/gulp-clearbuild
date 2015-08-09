@@ -12,7 +12,7 @@ const babelOptions = {
 };
 
 function hasCommonModules(code) {
-  return !!code.replace(commentRegex, '').match(/(import|export|require|exports/)\W/);
+  return !!code.replace(commentRegex, '').match(/(import|export|require|exports)\W/);
 }
 
 function bundlify() {
