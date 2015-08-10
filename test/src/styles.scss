@@ -1,0 +1,14 @@
+.exp-container {
+  background-color: white;
+  height: 200px;
+  width: 200px;
+
+  &.warn {
+    background-color: red;
+    color: white;
+  }
+
+  .msg {
+    text-transform: uppercase;
+  }
+}
