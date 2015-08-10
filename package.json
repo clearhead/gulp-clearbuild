@@ -1,10 +1,14 @@
 {
   "name": "gulp-clearbuild",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Predefined Gulp Tasks for Clearhead",
   "main": "lib/index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp lint",
+    "compile": "rm -rf ./lib/ && babel --plugins object-assign -d ./lib/ src/",
+    "prepublish": "npm run compile",
+    "postinstall": "mv ./lib/* ./",
+    "bump": "npm test && npm version patch -m 'bump to v%s' && npm publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
