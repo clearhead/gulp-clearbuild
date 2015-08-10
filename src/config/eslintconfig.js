@@ -1,15 +1,15 @@
 const config = {
   'ecmaFeatures': {
     'jsx': true,
-    'modules': true
+    'modules': true,
   },
   'env': {
     'browser': true,
     'es6': true,
-    'node': true
+    'node': true,
   },
   'globals': {
-    '$': false
+    '$': false,
   },
   'rules': {
     'comma-dangle': [2, 'always-multiline'],
@@ -21,7 +21,7 @@ const config = {
     'quotes': [2, 'single'],
     'semi': [2, 'always'],
     'strict': 0,
-  }
+  },
 };
 
 export default config;
