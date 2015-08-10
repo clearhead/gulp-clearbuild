@@ -8,45 +8,52 @@ import eslint from 'gulp-eslint';
 import eslintConfig from './config/eslintconfig';
 import csslint from 'gulp-csslint';
 import csslintConfig from './config/csslintconfig';
-
-const clearbuild = {};
+import finder from 'process-finder';
 
 const paths = {
+  src: './src/',
   html: './src/*.html',
   scripts: './src/*.js',
   stylesheets: ['./src/*.css', './src/*.scss', './src/*.sass'],
   dest: './build/',
 };
 
-clearbuild.use = (_gulp, { scripts, dest } = {}) => {
+export default function clearbuild(_gulp) {
   const gulp = gulpHelp(_gulp);
+  const sequence = gulpSeq.use(gulp);
 
   gulp.task('default', 'Run the dev task.', ['dev']);
 
   // -- Live Development ----------
-  gulp.task('dev',
-    'Build, watch, and preview your experiment with node proxy injector.',
-    ['build', 'npi', 'watch']
-  );
+  gulp.task('dev', 'Build and preview your experiment.', () => {
+    return sequence('build', 'watch')();
+  });
 
-  gulp.task('npi',
-    'Start node proxy injector. NPI must be installed globally.',
-    shell.task('npi')
-  );
+  gulp.task('npi', 'Start new NPI process.', () => {
+    return sequence('npi:kill', 'npi:start')();
+  });
+
+  gulp.task('npi:start', 'Start NPI process.', shell.task('npi'));
+
+  gulp.task('npi:kill', 'Kill NPI process.', () => {
+    return finder.find(8000, function(err, pids) {
+      pids.forEach((pid) => {
+        shell.task(`kill -9 ${ pid }`)();
+      });
+    });
+  });
 
   gulp.task('watch', 'Rebuild when experiment files change.', () => {
-    gulp.watch(paths.html, ['build']);
-    gulp.watch(paths.scripts, ['lint:scripts', 'build']);
-    gulp.watch(paths.stylesheets, ['lint:stylesheets', 'build']);
+    gulp.watch(paths.src, ['build']);
   });
 
   // -- Build Experiment ----------
   gulp.task('build', 'Build experiment scripts and stylesheets.', () => {
-    return sequence('lint', 'build:clean', ['build:scripts', 'build:stylesheets']);
+    return sequence('lint', 'build:clean', ['build:scripts', 'build:stylesheets'])();
   });
 
-  gulp.task('build:clean', 'Clean build.', () => {
-    del(paths.dest);
+  gulp.task('build:clean', 'Clean build.', (cb) => {
+    return del(paths.dest, cb);
   });
 
   gulp.task('build:scripts', 'Transpile and browserify scripts.', () => {
@@ -79,6 +86,4 @@ clearbuild.use = (_gulp, { scripts, dest } = {}) => {
       .pipe(csslint(csslintConfig))
       .pipe(csslint.reporter());
   });
-};
-
-export default clearbuild;
+}

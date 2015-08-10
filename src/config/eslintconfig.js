@@ -18,7 +18,6 @@ const config = {
     'new-cap': 0,
     'no-shadow': 0,
     'no-underscore-dangle': 0,
-    'no-unused-vars': 1,
     'quotes': [2, 'single'],
     'semi': [2, 'always'],
     'strict': 0,
