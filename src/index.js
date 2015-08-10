@@ -22,7 +22,7 @@ const paths = {
   dest: './build/',
 };
 
-export default function clearbuild(_gulp) {
+export default function clearbuild(_gulp, { lintCss = false }) {
   const gulp = gulpHelp(_gulp);
   const sequence = gulpSeq.use(gulp);
 
@@ -92,9 +92,11 @@ export default function clearbuild(_gulp) {
   });
 
   gulp.task('lint:stylesheets', 'Compile and lint stylesheets.', () => {
-    gulp.src(paths.stylesheets)
+    const task = gulp.src(paths.stylesheets)
       .pipe(gulpSass().on('error', gulpSass.logError))
-      .pipe(csslint(csslintConfig))
-      .pipe(csslint.reporter());
+      .pipe(csslint(csslintConfig));
+    if (lintCss) {
+      task.pipe(csslint.reporter());
+    }
   });
 }
