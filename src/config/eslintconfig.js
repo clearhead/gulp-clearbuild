@@ -1,4 +1,7 @@
 const config = {
+  'baseConfig': {
+    'parser': 'babel-eslint',
+  },
   'ecmaFeatures': {
     'jsx': true,
     'modules': true,
