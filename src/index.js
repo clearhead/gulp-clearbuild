@@ -11,7 +11,11 @@ import csslintConfig from './config/csslintconfig';
 import finder from 'process-finder';
 
 const paths = {
-  src: './src/',
+  src: {
+    html: './src/**/*.html',
+    scripts: './src/**/*.js',
+    stylesheets: ['./src/**/*.css', './src/**/*.scss', './src/**/*.sass'],
+  },
   html: './src/*.html',
   scripts: './src/*.js',
   stylesheets: ['./src/*.css', './src/*.scss', './src/*.sass'],
@@ -26,7 +30,12 @@ export default function clearbuild(_gulp) {
 
   // -- Live Development ----------
   gulp.task('dev', 'Build and preview your experiment.', () => {
-    return sequence('build', 'watch')();
+    return sequence(
+      ['lint:scripts', 'lint:stylesheets'],
+      ['build:scripts', 'build:stylesheets'],
+      'npi',
+      'watch'
+    )();
   });
 
   gulp.task('npi', 'Start new NPI process.', () => {
@@ -44,7 +53,9 @@ export default function clearbuild(_gulp) {
   });
 
   gulp.task('watch', 'Rebuild when experiment files change.', () => {
-    gulp.watch(paths.src, ['build']);
+    gulp.watch(paths.src.html, ['build']);
+    gulp.watch(paths.src.scripts, ['build']);
+    gulp.watch(paths.src.stylesheets, ['build']);
   });
 
   // -- Build Experiment ----------
