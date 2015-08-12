@@ -25,7 +25,7 @@ function bundlify() {
         if (err) console.error(err);
 
         const result = buf.toString();
-        const transformed = /optimizely/.test(result) ? optimizelify(result) : result;
+        const transformed = optimizelify(result);
         file.contents = new Buffer(transformed);
         next(null, file);
       });
