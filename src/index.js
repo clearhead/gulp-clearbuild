@@ -22,7 +22,7 @@ const paths = {
   dest: './build/',
 };
 
-export default function clearbuild(_gulp, { lintCss = false }) {
+export default function clearbuild(_gulp, { lintCss = false } = {}) {
   const gulp = gulpHelp(_gulp);
   const sequence = gulpSeq.use(gulp);
 
