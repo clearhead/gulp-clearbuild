@@ -12,35 +12,23 @@ const babelOptions = {
   plugins: ['object-assign'],
 };
 
-function hasCommonModules(code) {
-  return !!code.replace(commentRegex, '').match(/(import|export|require|exports)\W/);
-}
-
 function bundlify() {
   return through2.obj((file, enc, next) => {
     // get string of buffer contents
     const contents = file.contents.toString();
 
-    if (hasCommonModules(contents)) {
-      browserify(file.path)
-        .transform(babelify.configure(babelOptions))
-        .transform(stringify(['.html']))
-        .transform(sassify, { sourceMap: false })
-        .bundle((err, buf) => {
-          if (err) console.error(err);
-
-          const result = buf.toString();
-          const transformed = /optimizely/.test(result) ? optimizelify(result) : result;
-          file.contents = new Buffer(transformed);
-          next(null, file);
-        });
-    } else {
-      babel.transformFile(file, babelOptions, (err, buf) => {
+    browserify(file.path)
+      .transform(babelify.configure(babelOptions))
+      .transform(stringify(['.html']))
+      .transform(sassify, { sourceMap: false })
+      .bundle((err, buf) => {
         if (err) console.error(err);
-        file.contents = buf;
-        return next(null, file);
+
+        const result = buf.toString();
+        const transformed = /optimizely/.test(result) ? optimizelify(result) : result;
+        file.contents = new Buffer(transformed);
+        next(null, file);
       });
-    }
   });
 }
 
