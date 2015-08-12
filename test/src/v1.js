@@ -1,4 +1,4 @@
-/* optimizely_evaluate=force */
+/* _optimizely_evaluate=force */
 import { logger } from './mods/utils';
 import jsxr from 'jsxr';
 
@@ -13,5 +13,5 @@ $.exp.elem = (
   </div>
 );
 
-/* optimizely_evaluate=safe */
+/* _optimizely_evaluate=safe */
 $('body').prepend($.exp.elem);
