@@ -20,3 +20,7 @@ OR as a helper function:
 # before: mkdir exp-name && cd exp-name
 bash <(curl -s https://raw.githubusercontent.com/clearhead/gulp-clearbuild/master/init.sh)
 ```
+
+## Demo
+
+Clone down the repo, CD into ./test, then `gulp` it up.
