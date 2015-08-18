@@ -17,8 +17,9 @@ touch src/v1.js
 echo "/* _optimizely_evaluate=force */ /*global \$*/" >> src/v1.js
 echo "import html from './v1.html';" >> src/v1.js
 echo "import css from './v1.scss';" >> src/v1.js
+echo "window.expX = { html, css };" >> src/v1.js
 echo "/* _optimizely_evaluate=safe */" >> src/v1.js
-echo "\$('body').append(html);" >> src/v1.js
+echo "\$('body').append(expX.html);" >> src/v1.js
 
 echo "
 
