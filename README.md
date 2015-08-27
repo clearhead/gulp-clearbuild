@@ -19,6 +19,16 @@ Clearhead Gulp Extension
 
 `npm install --save-dev gulp-clearbuild`
 
+
+## Once Installed Locally
+
+Create an experiment project directory and run the helper scaffolding function:
+
+```bash
+# before: mkdir exp-name && cd exp-name
+bash <(curl -s https://raw.githubusercontent.com/clearhead/gulp-clearbuild/master/init.sh)
+```
+
 ## Usage
 
 ```js
@@ -26,13 +36,6 @@ Clearhead Gulp Extension
 import _gulp from 'gulp';
 import clearbuild from 'gulp-clearbuild';
 const gulp = clearbuild(_gulp);
-```
-
-OR as a helper function:
-
-```bash
-# before: mkdir exp-name && cd exp-name
-bash <(curl -s https://raw.githubusercontent.com/clearhead/gulp-clearbuild/master/init.sh)
 ```
 
 ## Demo
