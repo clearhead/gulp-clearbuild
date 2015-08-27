@@ -17,6 +17,10 @@ Clearhead Gulp Extension
 
 ## Installation
 
+You must have a package.json file in your local directory. To create one:
+`npm init`
+
+then run:
 `npm install --save-dev gulp-clearbuild`
 
 ## Usage
