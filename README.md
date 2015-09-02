@@ -9,7 +9,7 @@ Clearhead Gulp Extension
 * `npi` auto runs / starts when .npirc file exists [(github)](https://github.com/clearhead/node-proxy-injector)
 * SASS/CSS/HTML importable as strings `$('body').append(require('./exp.html'));`
 
-![](//i.imgur.com/isgm2Jt.png)
+![](https://i.imgur.com/isgm2Jt.png)
 
 Gets compiled down to [./example/build/v1.js](https://github.com/clearhead/gulp-clearbuild/blob/master/example/build/v1.js)
 
