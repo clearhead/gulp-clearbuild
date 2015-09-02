@@ -33,7 +33,7 @@ bash <(curl -s https://raw.githubusercontent.com/clearhead/gulp-clearbuild/maste
 
 ```js
 /*jshint unused:false*/
-var gulp = require('gulp-clearbuild');
+var gulp = require('gulp-clearbuild')(require('gulp'));
 ```
 
 ## Demo
