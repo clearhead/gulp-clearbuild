@@ -2,14 +2,16 @@
 
 Clearhead Gulp Extension
 
-#### Current ###
-
 * Browserify + Babelify ES6 Code
 * Handles Optimizely's Force / Safe Loop
 * Minifies where approriate
 * `gulp` watches by default
 * `npi` auto runs / starts when .npirc file exists [(github)](https://github.com/clearhead/node-proxy-injector)
 * SASS/CSS/HTML importable as strings `$('body').append(require('./exp.html'));`
+
+![](//i.imgur.com/isgm2Jt.png)
+
+Gets compiled down to [./example/build/v1.js](https://github.com/clearhead/gulp-clearbuild/blob/master/example/build/v1.js)
 
 #### Roadmap ###
 
