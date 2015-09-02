@@ -9,7 +9,6 @@ import commentRegex from 'comment-regex';
 
 const babelOptions = {
   jsxPragma: 'jsxr',
-  plugins: ['object-assign'],
 };
 
 function bundlify() {
