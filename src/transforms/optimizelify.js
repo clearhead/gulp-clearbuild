@@ -1,18 +1,21 @@
+import UglifyJS from 'uglify-js';
+
 const concat = String.prototype.concat.bind('');
 
 function optimizelify(code) {
-  const forceDirective = '/* _optimizely_evaluate=force */\n';
+  const forceDirective = '/* _optimizely_evaluate=force */';
   const jshint = {
-    start: '\/*jshint ignore:start*\/\n',
-    end: '\/*jshint ignore:end*\/\n',
+    start: '\n\/*jshint ignore:start*\/ ',
+    end: ' \/*jshint ignore:end*\/',
   };
 
-  const safeLoop = parseSafeLoop(code)
+  const safeLoop = parseSafeLoop(code);
 
   const regex = /\/\*\s?_optimizely_evaluate\=force\s?\*\/\n*/i;
   const forceLoop = code.replace(regex, '').replace(safeLoop, '');
+  const uglified = UglifyJS.minify(forceLoop, { fromString: true });
 
-  return concat(forceDirective, jshint.start, forceLoop, jshint.end, safeLoop);
+  return concat(forceDirective, jshint.start, uglified.code, jshint.end, safeLoop);
 }
 
 function parseSafeLoop(code) {
