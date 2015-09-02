@@ -4,10 +4,9 @@
   "description": "Predefined Gulp Tasks for Clearhead",
   "main": "lib/index.js",
   "scripts": {
-    "test": "gulp lint",
     "compile": "rm -rf ./lib/ && babel --plugins object-assign -d ./lib/ src/",
     "prepublish": "npm run compile",
-    "bump": "npm test && npm version patch -m 'bump to v%s' && npm publish && git push --follow-tags"
+    "bump": "npm version patch -m 'bump to v%s' && npm publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
