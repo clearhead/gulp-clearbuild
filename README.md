@@ -15,6 +15,13 @@ Clearhead Gulp Extension
 
 `npm install --save-dev gulp-clearbuild`
 
+Create an experiment project directory and run the helper scaffolding function:
+
+```bash
+# before: mkdir exp-name && cd exp-name
+bash <(curl -sL http://git.io/v3Z6O)
+```
+
 ## ./test as an example
 
 Clone down the rep, `cd test/`, `gulp`, then `open localhost:8000`!
@@ -42,15 +49,6 @@ $('body').append(expX.html);
 #### Roadmap ###
 
 * Optimizely API Sync / Upload
-
-## Scaffolding
-
-Create an experiment project directory and run the helper scaffolding function:
-
-```bash
-# before: mkdir exp-name && cd exp-name
-bash <(curl -sL http://git.io/v3Z6O)
-```
 
 ## Usage
 
