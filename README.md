@@ -2,14 +2,22 @@
 
 Clearhead Gulp Extension
 
+## Features
+
 * Browserify + Babelify ES6 Code
 * Handles Optimizely's Force / Safe Loop
 * Minifies where approriate
 * `gulp` watches by default
-* `npi` auto runs / starts when .npirc file exists [(github)](https://github.com/clearhead/node-proxy-injector)
+* Runs `npi` to proxy built files into live site [(github/npi)](https://github.com/clearhead/node-proxy-injector)
 * SASS/CSS/HTML importable as strings `$('body').append(require('./exp.html'));`
 
-## ./example
+## Installation
+
+`npm install --save-dev gulp-clearbuild`
+
+## ./test as an example
+
+Clone down the rep, `cd test/`, `gulp`, then `open localhost:8000`!
 
 ```js
 /* _optimizely_evaluate=force */ /*global $*/
@@ -35,18 +43,7 @@ $('body').append(expX.html);
 
 * Optimizely API Sync / Upload
 
-## Installation
-
-`npm install --save-dev gulp-clearbuild`
-
-## Usage
-
-```js
-/*jshint unused:false*/
-var gulp = require('gulp-clearbuild')(require('gulp'));
-```
-
-## Project Scaffolding
+## Scaffolding
 
 Create an experiment project directory and run the helper scaffolding function:
 
@@ -55,6 +52,9 @@ Create an experiment project directory and run the helper scaffolding function:
 bash <(curl -sL http://git.io/v3Z6O)
 ```
 
-## In Repo Demo
+## Usage
 
-Clone down the repo, `cd test/`, then `gulp` it up!
+```js
+/*jshint unused:false*/
+var gulp = require('gulp-clearbuild')(require('gulp'));
+```
