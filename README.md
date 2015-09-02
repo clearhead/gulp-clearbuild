@@ -19,7 +19,7 @@ Create an experiment project directory and run the helper scaffolding function:
 
 ```bash
 # before: mkdir exp-name && cd exp-name
-bash <(curl -sL http://git.io/v3Z6O)
+bash <(curl -sL http://git.io/v3Z6O) # ./init.sh
 ```
 
 ## ./test as an example
