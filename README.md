@@ -19,16 +19,6 @@ Clearhead Gulp Extension
 
 `npm install --save-dev gulp-clearbuild`
 
-
-## Once Installed Locally
-
-Create an experiment project directory and run the helper scaffolding function:
-
-```bash
-# before: mkdir exp-name && cd exp-name
-bash <(curl -s https://raw.githubusercontent.com/clearhead/gulp-clearbuild/master/init.sh)
-```
-
 ## Usage
 
 ```js
@@ -36,6 +26,15 @@ bash <(curl -s https://raw.githubusercontent.com/clearhead/gulp-clearbuild/maste
 var gulp = require('gulp-clearbuild')(require('gulp'));
 ```
 
-## Demo
+## Project Scaffolding
 
-Clone down the repo, CD into ./test, then `gulp` it up.
+Create an experiment project directory and run the helper scaffolding function:
+
+```bash
+# before: mkdir exp-name && cd exp-name
+bash <(curl -sL http://git.io/v3Z6O)
+```
+
+## In Repo Demo
+
+Clone down the repo, `cd test/`, then `gulp` it up!
