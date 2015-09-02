@@ -1,6 +1,6 @@
 {
   "name": "gulp-clearbuild",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Predefined Gulp Tasks for Clearhead",
   "main": "lib/index.js",
   "scripts": {
