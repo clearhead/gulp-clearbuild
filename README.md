@@ -12,13 +12,13 @@ Clearhead Gulp Extension
 ## Example ##
 
 ```js
-// ./src/v1.html
+/** ./src/v1.html **/
 <div id="expx">{{message}}</div>
 
-// ./src/v1.scss
+/** ./src/v1.scss **/
 #expx { span { display: none ;} }
 
-// ./src/v1.js
+/** ./src/v1.js  **/
 /* _optimizely_evaluate=force */ /*global $*/
 import timpl from 'clearhead/timpl'; // npm install clearhead
 const css = require('./v1.scss');
