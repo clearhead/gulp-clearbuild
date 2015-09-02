@@ -21,7 +21,7 @@ $('head').append('<style>'+expX.css+'</style>');
 $('body').append(expX.html);
 ```
 
-`gulp # watch`: 
+`$ gulp # watch:` 
 
 ```js
 /* _optimizely_evaluate=force */
