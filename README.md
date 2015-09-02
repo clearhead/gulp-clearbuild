@@ -33,9 +33,7 @@ bash <(curl -s https://raw.githubusercontent.com/clearhead/gulp-clearbuild/maste
 
 ```js
 /*jshint unused:false*/
-import _gulp from 'gulp';
-import clearbuild from 'gulp-clearbuild';
-const gulp = clearbuild(_gulp);
+var gulp = require('gulp-clearbuild');
 ```
 
 ## Demo
