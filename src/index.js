@@ -1,4 +1,3 @@
-import _gulp from 'gulp';
 import gulpHelp from 'gulp-help';
 import bundlify from './transforms/bundlify';
 import gulpSeq from 'gulp-sequence';
@@ -23,17 +22,16 @@ const paths = {
   dest: './build/',
 };
 
-const gulp = gulpHelp(_gulp);
-const sequence = gulpSeq.use(gulp);
-
-export default (() => {
+export default function clearbuild(_gulp, { lintCss = false } = {}) {
+  const gulp = gulpHelp(_gulp);
+  const sequence = gulpSeq.use(gulp);
 
   gulp.task('default', 'Run the dev task.', ['dev']);
 
   // -- Live Development ----------
   gulp.task('dev', 'Build and preview your experiment.', () => {
     return sequence(
-      ['lint:scripts'/*, 'lint:stylesheets'*/],
+      ['lint:scripts', 'lint:stylesheets'],
       ['build:scripts', 'build:stylesheets'],
       'npi',
       'watch'
@@ -84,7 +82,7 @@ export default (() => {
   // -- Lint Experiment ----------
   gulp.task('lint',
     'Lint scripts and stylesheets',
-    ['lint:scripts'/*, 'lint:stylesheets'*/]
+    ['lint:scripts', 'lint:stylesheets']
   );
 
   gulp.task('lint:scripts', 'Lint scripts.', () => {
@@ -96,9 +94,9 @@ export default (() => {
   gulp.task('lint:stylesheets', 'Compile and lint stylesheets.', () => {
     const task = gulp.src(paths.stylesheets)
       .pipe(gulpSass().on('error', gulpSass.logError))
-      .pipe(csslint(csslintConfig))
-      .pipe(csslint.reporter());
+      .pipe(csslint(csslintConfig));
+    if (lintCss) {
+      task.pipe(csslint.reporter());
+    }
   });
-
-  return gulp;
-})();
+}
