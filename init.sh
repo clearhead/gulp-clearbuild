@@ -15,12 +15,15 @@ touch src/v1.scss
 echo "#expx{foo:bar;}" >> src/v1.scss
 touch src/v1.js
 echo "/* _optimizely_evaluate=force */ /*global \$*/" >> src/v1.js
+echo "import when from 'clearhead/when';" >> src/v1.js
 echo "import html from './v1.html';" >> src/v1.js
 echo "import css from './v1.scss';" >> src/v1.js
 echo "window.expX = { html, css };" >> src/v1.js
 echo "/* _optimizely_evaluate=safe */" >> src/v1.js
-echo "\$('head').append('<style>'+expX.css+'</style>');" >> src/v1.js
-echo "\$('body').append(expX.html);" >> src/v1.js
+echo "$('head').append('<style>'+expX.css+'</style>');" >> src/v1.js
+echo "when('body', function($el){" >> src/v1.js
+echo "  $el.append(expX.html);" >> src/v1.js
+echo "});" >> src/v1.js
 
 echo "
 
