@@ -3,9 +3,7 @@
 touch gulpfile.babel.js
 
 echo "/*jshint unused:false*/" >> gulpfile.babel.js
-echo "import _gulp from 'gulp';" >> gulpfile.babel.js
-echo "import clearbuild from 'gulp-clearbuild';" >> gulpfile.babel.js
-echo "const gulp = clearbuild(_gulp);" >> gulpfile.babel.js
+echo "var gulp = require('gulp-clearbuild')(require('gulp'));" >> gulpfile.babel.js
 
 mkdir src
 
