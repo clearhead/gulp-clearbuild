@@ -22,17 +22,18 @@ const paths = {
   dest: './build/',
 };
 
-export default function clearbuild(_gulp, { lintCss = false } = {}) {
+export default function clearbuild(_gulp, {
+  lintCss = false
+} = {}) {
   const gulp = gulpHelp(_gulp);
   const sequence = gulpSeq.use(gulp);
 
   gulp.task('default', 'Run the dev task.', ['dev']);
 
   // -- Live Development ----------
-  gulp.task('dev', 'Build and preview your experiment.', () => {
+  gulp.task('dev', ' **** Build and preview your experiment. ****', () => {
     return sequence(
-      ['lint:scripts', 'lint:stylesheets'],
-      ['build:scripts', 'build:stylesheets'],
+      ['lint:scripts', 'lint:stylesheets'], ['build:scripts', 'build:stylesheets'],
       'npi',
       'watch'
     )();
@@ -81,8 +82,7 @@ export default function clearbuild(_gulp, { lintCss = false } = {}) {
 
   // -- Lint Experiment ----------
   gulp.task('lint',
-    'Lint scripts and stylesheets',
-    ['lint:scripts', 'lint:stylesheets']
+    'Lint scripts and stylesheets', ['lint:scripts', 'lint:stylesheets']
   );
 
   gulp.task('lint:scripts', 'Lint scripts.', () => {
