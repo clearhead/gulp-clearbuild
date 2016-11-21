@@ -9,6 +9,7 @@ import eslintConfig from './config/eslintconfig';
 import csslint from 'gulp-csslint';
 import csslintConfig from './config/csslintconfig';
 import finder from 'process-finder';
+import growl from 'gulp-notify-growl';
 
 const paths = {
   src: {
@@ -76,7 +77,10 @@ export default function clearbuild(_gulp, {
 
   gulp.task('build:stylesheets', 'Compile stylesheets.', () => {
     return gulp.src(paths.stylesheets)
-      .pipe(gulpSass().on('error', gulpSass.logError))
+      .pipe(gulpSass().on('error', growlNotifier({
+        title: 'Sass Error.',
+        message: gulpSass.logError
+      })))
       .pipe(gulp.dest(paths.dest));
   });
 
