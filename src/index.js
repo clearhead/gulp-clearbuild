@@ -32,9 +32,7 @@ export default function clearbuild(_gulp, { lintCss = false } = {}) {
   gulp.task('dev', 'Build and preview your experiment.', () => {
     return sequence(
       ['lint:scripts', 'lint:stylesheets'],
-      ['build:scripts', 'build:stylesheets'],
-      'npi',
-      'watch'
+      ['build:scripts', 'build:stylesheets']
     )();
   });
 
