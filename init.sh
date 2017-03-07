@@ -3,9 +3,7 @@
 touch gulpfile.babel.js
 
 echo "/*jshint unused:false*/" >> gulpfile.babel.js
-echo "import _gulp from 'gulp';" >> gulpfile.babel.js
-echo "import clearbuild from 'gulp-clearbuild';" >> gulpfile.babel.js
-echo "const gulp = clearbuild(_gulp);" >> gulpfile.babel.js
+echo "var gulp = require('gulp-clearbuild')(require('gulp'));" >> gulpfile.babel.js
 
 mkdir src
 
@@ -17,9 +15,9 @@ touch src/v1.js
 echo "/* _optimizely_evaluate=force */ /*global \$*/" >> src/v1.js
 echo "import html from './v1.html';" >> src/v1.js
 echo "import css from './v1.scss';" >> src/v1.js
-echo "window.expX = { html, css };" >> src/v1.js
+echo "window.expX = { html };" >> src/v1.js
+echo "\$('head').append('<style>'+css+'</style>');" >> src/v1.js
 echo "/* _optimizely_evaluate=safe */" >> src/v1.js
-echo "\$('head').append('<style>'+expX.css+'</style>');" >> src/v1.js
 echo "\$('body').append(expX.html);" >> src/v1.js
 
 echo "
